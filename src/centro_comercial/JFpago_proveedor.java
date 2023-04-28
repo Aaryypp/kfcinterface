@@ -15,7 +15,7 @@ public class JFpago_proveedor extends javax.swing.JFrame {
     public static ResultSet rs;
     public static Connection con = null;
     public static PreparedStatement ps;
-    
+    public static String rucprove;
     public static String nombre_propio;
 
     public JFpago_proveedor() {
@@ -24,73 +24,73 @@ public class JFpago_proveedor extends javax.swing.JFrame {
     }
     
     public static void limpiar(){
-        jt_nombre.setText("");
-        jta_descripcion.setText("");
+//        jt_nombre.setText("");
+//        jta_descripcion.setText("");
     }
 
     public void llenar(String PK) {
-        con =  (Connection) conexion.conectar();
-        if (con != null) {
-            try {
-                ps = (PreparedStatement) con.prepareStatement("SELECT * FROM CATEGORIA WHERE ID=" + PK);
-                rs = ps.executeQuery();
-                rs.next();
-                id.setText(String.valueOf(""+rs.getInt(1)));
-                jt_nombre.setText(rs.getString(2).toUpperCase());
-                nombre_propio = rs.getString(2).toUpperCase();
-                jta_descripcion.setText(rs.getString(3));
-                this.setVisible(true);
-            } catch (SQLException e) {
-                getToolkit().beep();
-                JOptionPane.showMessageDialog(rootPane, "¡La categoría '" + PK + "' no existe!");
-            }
-        }
+//        con =  (Connection) conexion.conectar();
+//        if (con != null) {
+//            try {
+//                ps = (PreparedStatement) con.prepareStatement("SELECT * FROM CATEGORIA WHERE ID=" + PK);
+//                rs = ps.executeQuery();
+//                rs.next();
+//                id.setText(String.valueOf(""+rs.getInt(1)));
+//                jt_nombre.setText(rs.getString(2).toUpperCase());
+//                nombre_propio = rs.getString(2).toUpperCase();
+//                jta_descripcion.setText(rs.getString(3));
+//                this.setVisible(true);
+//            } catch (SQLException e) {
+//                getToolkit().beep();
+//                JOptionPane.showMessageDialog(rootPane, "¡La categoría '" + PK + "' no existe!");
+//            }
+//        }
     }
     
     public void registrar() {
-        con = (Connection) conexion.conectar();
-        if (con != null) {
-            try {
-                ps = (PreparedStatement) con.prepareStatement("SELECT * FROM CATEGORIA WHERE NOMBRE='" + jt_nombre.getText().toUpperCase() + "'");
-                if (ps.executeQuery().next()) {
-                    JOptionPane.showMessageDialog(null, "¡La categoría '" + jt_nombre.getText().toUpperCase() + "' ya está en uso!");
-                } else {
-                    ps = (PreparedStatement) con.prepareStatement("INSERT INTO CATEGORIA (NOMBRE, DESCRIPCION) VALUES (?,?)");
-                    ps.setString(1, jt_nombre.getText().toUpperCase());
-                    ps.setString(2, jta_descripcion.getText().toUpperCase());
-                    ps.executeUpdate(); //Ejecuta la consulta
-                    JOptionPane.showMessageDialog(null, "¡Registrado correctamente!");
-                    PRINCIPAL.actualizado = false;
-                    this.dispose();
-                }
-            } catch (SQLException ex) {
-                getToolkit().beep();
-                JOptionPane.showMessageDialog(null, "¡Error al registrar!");
-            }
-        }
+//        con = (Connection) conexion.conectar();
+//        if (con != null) {
+//            try {
+//                ps = (PreparedStatement) con.prepareStatement("SELECT * FROM CATEGORIA WHERE NOMBRE='" + jt_nombre.getText().toUpperCase() + "'");
+//                if (ps.executeQuery().next()) {
+//                    JOptionPane.showMessageDialog(null, "¡La categoría '" + jt_nombre.getText().toUpperCase() + "' ya está en uso!");
+//                } else {
+//                    ps = (PreparedStatement) con.prepareStatement("INSERT INTO CATEGORIA (NOMBRE, DESCRIPCION) VALUES (?,?)");
+//                    ps.setString(1, jt_nombre.getText().toUpperCase());
+//                    ps.setString(2, jta_descripcion.getText().toUpperCase());
+//                    ps.executeUpdate(); //Ejecuta la consulta
+//                    JOptionPane.showMessageDialog(null, "¡Registrado correctamente!");
+//                    PRINCIPAL.actualizado = false;
+//                    this.dispose();
+//                }
+//            } catch (SQLException ex) {
+//                getToolkit().beep();
+//                JOptionPane.showMessageDialog(null, "¡Error al registrar!");
+//            }
+//        }
     }
     public void modificar(){
-        con = (Connection) conexion.conectar();
-        if (con != null) {
-            try {
-                ps = (PreparedStatement) con.prepareStatement("SELECT * FROM CATEGORIA WHERE NOMBRE='" + jt_nombre.getText().toUpperCase()+"'");
-                if (ps.executeQuery().next() && !jt_nombre.getText().toUpperCase().equals(nombre_propio)) {
-                    JOptionPane.showMessageDialog(null, "¡La categoría '" + jt_nombre.getText().toUpperCase() + "' ya está en uso!");
-                } else {
-                    ps = (PreparedStatement) con.prepareStatement("UPDATE CATEGORIA SET NOMBRE=?,DESCRIPCION=? WHERE ID=?");
-                    ps.setString(1, jt_nombre.getText().toUpperCase());
-                    ps.setString(2, jta_descripcion.getText().toUpperCase());
-                    ps.setInt(3, Integer.parseInt(id.getText()));
-                    ps.executeUpdate(); //Ejecuta la consulta
-                    JOptionPane.showMessageDialog(null, "¡Modificado correctamente!");
-                    PRINCIPAL.actualizado = false;
-                    this.dispose();
-                }
-            } catch (SQLException ex) {
-                getToolkit().beep();
-                JOptionPane.showMessageDialog(null, "¡Error al modificar!");
-            }
-        }
+//        con = (Connection) conexion.conectar();
+//        if (con != null) {
+//            try {
+//                ps = (PreparedStatement) con.prepareStatement("SELECT * FROM CATEGORIA WHERE NOMBRE='" + jt_nombre.getText().toUpperCase()+"'");
+//                if (ps.executeQuery().next() && !jt_nombre.getText().toUpperCase().equals(nombre_propio)) {
+//                    JOptionPane.showMessageDialog(null, "¡La categoría '" + jt_nombre.getText().toUpperCase() + "' ya está en uso!");
+//                } else {
+//                    ps = (PreparedStatement) con.prepareStatement("UPDATE CATEGORIA SET NOMBRE=?,DESCRIPCION=? WHERE ID=?");
+//                    ps.setString(1, jt_nombre.getText().toUpperCase());
+//                    ps.setString(2, jta_descripcion.getText().toUpperCase());
+//                    ps.setInt(3, Integer.parseInt(id.getText()));
+//                    ps.executeUpdate(); //Ejecuta la consulta
+//                    JOptionPane.showMessageDialog(null, "¡Modificado correctamente!");
+//                    PRINCIPAL.actualizado = false;
+//                    this.dispose();
+//                }
+//            } catch (SQLException ex) {
+//                getToolkit().beep();
+//                JOptionPane.showMessageDialog(null, "¡Error al modificar!");
+//            }
+//        }
        
     }
 
@@ -280,17 +280,17 @@ public class JFpago_proveedor extends javax.swing.JFrame {
     }//GEN-LAST:event_jl_cerrarMouseClicked
 
     private void jb_EjecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jb_EjecutarActionPerformed
-        String desc = jta_descripcion.getText().replaceAll("\\s+", "");
-        if (jt_nombre.getText().equals("") || desc.equals("")) {
-            getToolkit().beep();
-            JOptionPane.showMessageDialog(rootPane, "¡Aún hay campos por completar!");
-        } else {
-            if (forma.equals("registrar")) {
-                registrar();
-            } else if(forma.equals("modificar")){
-                modificar();
-            }
-        }
+//        String desc = jta_descripcion.getText().replaceAll("\\s+", "");
+//        if (jt_nombre.getText().equals("") || desc.equals("")) {
+//            getToolkit().beep();
+//            JOptionPane.showMessageDialog(rootPane, "¡Aún hay campos por completar!");
+//        } else {
+//            if (forma.equals("registrar")) {
+//                registrar();
+//            } else if(forma.equals("modificar")){
+//                modificar();
+//            }
+//        }
 
     }//GEN-LAST:event_jb_EjecutarActionPerformed
 
@@ -344,6 +344,7 @@ public class JFpago_proveedor extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(JFpago_proveedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+      
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -358,6 +359,7 @@ public class JFpago_proveedor extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+    
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -372,6 +374,7 @@ public class JFpago_proveedor extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+      
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -381,225 +384,8 @@ public class JFpago_proveedor extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+       
+        
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -611,7 +397,7 @@ public class JFpago_proveedor extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JTextField Bcat;
-    private javax.swing.JTable JTcat;
+    public javax.swing.JTable JTcat;
     private javax.swing.JLabel Lcat;
     public static javax.swing.JButton jb_Ejecutar;
     private javax.swing.JLabel jl_cerrar;
